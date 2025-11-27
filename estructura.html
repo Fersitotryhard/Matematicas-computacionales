@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cine VIP</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        /* Degradado suave como fondo */
+        background: linear-gradient(to bottom, #34495e, #2c3e50); /* Tonos oscuros y elegantes */
+        color: white;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente para el contraste */
+    }
+    /* LADO IZQUIERDO */
+    .left-panel {
+        width: 40%;
+        padding: 20px;
+        box-sizing: border-box;
+        border-right: 3px solid #fff;
+    }
+    .pelicula {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 5px;
+    }
+    .pelicula img {
+        width: 70px;
+        height: 100px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+    .pelicula-info {
+        flex-grow: 1;
+    }
+    .formulario label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    .formulario input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: white;
+        border: none;
+    }
+    .guardar-btn {
+        background-color: green;
+        color: white;
+        padding: 15px;
+        border: none;
+        width: 100%;
+        margin-top: 15px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    /* LADO DERECHO */
+    .right-panel {
+        width: 60%;
+        padding: 20px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .pantalla {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .asientos {
+        display: grid;
+        grid-template-columns: repeat(4, 60px);
+        grid-gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .asiento {
+        width: 60px;
+        height: 60px;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+    .ocupado { background-color: red; cursor: not-allowed; }
+    .disponible { background-color: green; }
+    .seleccionado { background-color: gold; color: black; }
+    .leyenda {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    .leyenda span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .color-box {
+        width: 15px;
+        height: 15px;
+        border-radius: 3px;
+    }
+    /* Asegurar que el texto sea legible */
+    h1, h2, h3, h4, h5, h6, p, label, input, button {
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Panel Izquierdo -->
+    <div class="left-panel">
+        <div class="pelicula" onclick="seleccionarFuncion('El Teléfono Negro 2', '2:00 PM')">
+            <img src="https://imgs.search.brave.com/nNhIWg7P-4zZmfhpsWJqPs4QK0DKtb4SR1N23CR6sBU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tYW5o/YXR0YW5zdHVkaW8u/ZXMvX25leHQvaW1h/Z2U_dXJsPWh0dHBz/Oi8vaW1hZ2UudG1k/Yi5vcmcvdC9wL3c1/MDAvL2Q5a0RZRm9R/emNtaFd0bW5jSmhL/c0ZxOEtvSC5qcGcm/dz03NTAmcT03NQ" alt="">
+            <div class="pelicula-info">
+                <b>El Teléfono Negro 2</b><br>2:00 PM
+            </div>
+        </div>
+        <div class="pelicula" onclick="seleccionarFuncion('PAW PATROL: ESPECIAL DE NAVIDAD', '5:00 PM')">
+            <img src="https://imgs.search.brave.com/pKsZCFKzXSM3c-K-aTXwV3GzUC5g9kA44jPb2VUDG3w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9yZXNp/emVyLmdsYW5hY2lv/bi5jb20vcmVzaXpl/ci92Mi9OTUxZSEJN/TkNWRElSRVA2WlYz/WUNGTzdGVS5wbmc_/YXV0aD04MTQ3Y2Iy/MzFiYTZmMTdjYTgx/N2QzMzVhM2EwYTY2/OWIzMzM4Y2I5ZGU5/MDI3NzY2MGZkMjQ0/YjQyNGVhMTcyJndp/ZHRoPTIxMCZoZWln/aHQ9MzAwJnNtYXJ0/PXRydWU" alt="">
+            <div class="pelicula-info">
+                <b>PAW PATROL: ESPECIAL DE NAVIDAD</b><br>5:00 PM
+            </div>
+        </div>
+        <div class="pelicula" onclick="seleccionarFuncion('A pesar de ti', '8:00 PM')">
+            <img src="https://imgs.search.brave.com/_LG9BEY6nUNeJjpML3-x8iFV8XXI5uCqiIgUcvYwjOg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9lcy53/ZWIuaW1nMi5hY3N0/YS5uZXQvY18zMDBf/MzAwL2ltZy80OS9m/NC80OWY0Yjg2OGYy/Y2NlYWIxOGQ1OGE2/NGY3NTlmYjhhOS5q/cGc" alt="">
+            <div class="pelicula-info">
+                <b>A pesar de ti</b><br>8:00 PM
+            </div>
+        </div>
+
+        <div class="formulario">
+            <label for="nombreCliente">Nombre</label>
+            <input type="text" id="nombreCliente">
+
+            <label for="asientoCompra">Asiento</label>
+            <input type="text" id="asientoCompra" readonly>
+
+            <label for="precioCompra">Precio</label>
+            <input type="text" id="precioCompra" value="$10" readonly>
+
+            <button class="guardar-btn" onclick="finalizarCompra()">GUARDAR</button>
+        </div>
+    </div>
+
+    <!-- Panel Derecho -->
+    <div class="right-panel">
+        <div class="pantalla">PANTALLA</div>
+        <h3 id="peliculaSeleccionada">Selecciona una película</h3>
+        <p id="horaSeleccionada"></p>
+        <div class="asientos" id="asientos"></div>
+
+        <div class="leyenda">
+            <span><div class="color-box" style="background-color:gold;"></div>Seleccionado</span>
+            <span><div class="color-box" style="background-color:green;"></div>Disponible</span>
+            <span><div class="color-box" style="background-color:red;"></div>Ocupado</span>
+        </div>
+    </div>
+</div>
+
+<script>
+let peliculaActual = "";
+let horaActual = "";
+let asientoSeleccionado = null;
+let asientosOcupados = []; // todos libres al inicio
+
+function seleccionarFuncion(pelicula, hora) {
+    peliculaActual = pelicula;
+    horaActual = hora;
+    document.getElementById("peliculaSeleccionada").innerText = pelicula;
+    document.getElementById("horaSeleccionada").innerText = hora;
+    generarAsientos();
+}
+
+function generarAsientos() {
+    const contenedor = document.getElementById("asientos");
+    contenedor.innerHTML = "";
+    for (let i = 1; i <= 16; i++) {
+        const div = document.createElement("div");
+        div.classList.add("asiento");
+        div.innerText = i;
+
+        if (asientosOcupados.includes(i)) {
+            div.classList.add("ocupado"); 
+        } else {
+            div.classList.add("disponible"); 
+            div.addEventListener("click", () => seleccionarAsiento(i));
+        }
+
+        contenedor.appendChild(div);
+    }
+}
+
+function seleccionarAsiento(num) {
+    const previo = document.querySelector(`.asiento.seleccionado`);
+    if (previo) {
+        previo.classList.remove("seleccionado");
+        previo.classList.add("disponible");
+    }
+
+    asientoSeleccionado = num;
+    document.getElementById("asientoCompra").value = num;
+
+    const div = document.querySelector(`.asientos .asiento:nth-child(${num})`);
+    div.classList.remove("disponible");
+    div.classList.add("seleccionado");
+}
+
+function finalizarCompra() {
+    if (!peliculaActual || asientoSeleccionado === null) {
+        alert("Selecciona la película y un asiento antes de guardar.");
+        return;
+    }
+    asientosOcupados.push(asientoSeleccionado);
+    alert(`Compra guardada: ${peliculaActual} - Asiento ${asientoSeleccionado}`);
+    
+    generarAsientos();
+    document.getElementById("nombreCliente").value = "";
+    document.getElementById("asientoCompra").value = "";
+    asientoSeleccionado = null;
+}
+</script>
+
+</body>
+</html>
